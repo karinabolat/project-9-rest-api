@@ -43,6 +43,7 @@ router.post('/users', asyncHandler(async (req, res) => {
 // Route that returns all courses.
 router.get('/courses', asyncHandler(async (req, res) => {
   const courses = await Course.findAll({
+    attributes: { exclude: ["createdAt", "updatedAt"] },
     include: [
       {
         model: User,
@@ -56,6 +57,7 @@ router.get('/courses', asyncHandler(async (req, res) => {
 // Route that returns a corresponding course
 router.get("/courses/:id", asyncHandler(async (req, res, next) => {
   const course = await Course.findByPk(req.params.id, {
+    attributes: { exclude: ["createdAt", "updatedAt"] },
     include: [
       {
         model: User,
